@@ -1,0 +1,52 @@
+/* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
+
+@media (max-width: 600px) {
+    .form-inline input {
+      margin: 10px 0px 10px 0px;
+    }
+  
+    .form-inline {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .save-remove {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* Layout for average screens */
+
+@media(min-width: 601px){
+    .container {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 35% 65%;
+        grid-template-areas: 
+        "image"
+        "left";
+        border: 3px solid rgb(78, 59, 83);
+        width: auto;
+    }
+    
+    .image {
+        grid-area: "image";
+        //background-image: "../src/client/media/red-square.jpg";
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .form {
+        grid-area: "left";
+    }
+    
+    .save-remove {
+        grid-area: "left";
+    }
+    
+    .results{
+        grid-area: "left";
+    }
+
+}

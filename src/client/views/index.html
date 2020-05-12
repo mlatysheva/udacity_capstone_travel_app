@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Plan Your Trip</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href="../styles/resets.css">
+        <link rel="stylesheet" href="../styles/base.css">       
+        <link rel="stylesheet" href="../styles/form.css">-->
+    </head>
+
+    <body>
+
+        <header class = "hd">
+            <div>
+                Travel Planner                
+            </div>
+        </header>
+
+        <main class = container>
+            <section class = "img">
+                <img class = "city_image" src = "../src/client/media/red-square.jpg">
+            </section>
+            <section class = "form">
+                <form class="form-inline" action="">
+                    <label for="city">My trip to:</label>
+                    <input type="city" id="city" placeholder="Enter city" name="city">
+                    <label for="date">Departing on:</label>
+                    <input type="date" id="date" placeholder="Enter the departure date" name="date">
+                    <button type="submit" id = "submit-button">Get info</button>
+                  </form>
+            </section>
+                <!-- <div class = "form_input">
+                    <div class = "left_form">My trip to:</div>
+                    <div class = "right_form">
+                        <form class="city" onsubmit="return Client.handleSubmit(event)">
+                            <input id="city" type="text" name="input" value="" placeholder="Enter city">
+                        </form>
+                    </div>
+                </div>
+                <div class = "form_input">
+                    <div class = "left_form">Departing:</div>
+                    <div class = "right_form">
+                        <form class="city" onsubmit="return Client.handleSubmit(event)">
+                            <input id="city" type="text" name="input" value="" placeholder="Enter your travel date in dd/mm/yyyy">
+                            <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
+                        </form>
+                    </div>
+                </div>
+            <section> -->
+
+            <section class = "save-remove">
+                <button type="submit">Save trip</button>
+                <button type="submit">Remove trip</button>
+            </section>
+            <section class = "results">
+                <div id = "city">Moscow, Russia is 20 days away</div>                
+                <div>Typical weather for then is:</div>
+                <div id = "temperature">High 26, Low 9</div>
+                <div id = "weather">Mostly cloudy throughout the day.</div>
+            </section>
+        </main>
+
+        <footer>
+            <div>This Travel Planner is brought to you by Maria Latysheva in cooperation with Geonames, Weatherbit and Pixabay.</div>
+        </footer>
+        <!-- <script>
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script> -->
+
+    </body>
+</html>
