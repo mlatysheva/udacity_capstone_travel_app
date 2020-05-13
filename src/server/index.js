@@ -1,4 +1,8 @@
+//import geonames from {geonames};
+
 const dotenv = require('dotenv');
+const fetch = require("node-fetch");
+
 dotenv.config();
 var path = require('path')
 const express = require('express')
@@ -10,6 +14,8 @@ let tripData = {
   "city": "Paris",
   "country": "France",
   "duration": 1,
+  "longitude": 45,
+  "latitude": 60,
   "temperature_high": 25,
   "temperature_low": 9,
   "weather_desc": "It will be mostly cloudy throughout the day."
@@ -72,11 +78,11 @@ app.post('/trip', saveTrip);
 
 // Request results from the Alyen API for the text input by the user
 
-app.get('/weather', sendWeather);
+app.get('/weather', sendTripInfo);
 
-function sendWeather(req, res) {
+function sendTripInfo(req, res) {
   console.log('Sending the weather forecast');
-  //tripData.duration = duration(dep_date)
+  geonames(tripData.city);  
   console.log(tripData)
   res.send(tripData)
 
@@ -106,19 +112,29 @@ function duration(dep_date) {
 return period;
 }
 
-// function sendResult (req, res) {
-//   console.log('Call external API');
-//   textapi.sentiment(inputText, function(error, response) {
-//     if (error === null) {
-//       console.log(response);
-//       result = response;
-//       res.send(result);
-//     }
-//     else
-//     { 
-//       console.log(error);
-//       res.send('{\"Status\":\"Error\"}');
-//     }
-//   });
-// };
+// Get the country, longitude and latitude from Geonames API by entering the city and records these parameters into
+// the tripData endpoint
+
+function geonames(city) {
+  const user = 'mlatysheva';
+  const baseUrl = 'http://api.geonames.org/searchJSON?q='
+  const addParameters = '&maxRows=1&username=';
+  const entireUrl = (baseUrl + city + addParameters + user);
+
+  const getData = async (entireUrl) => {
+      
+      try {
+          const response = await fetch(entireUrl);
+          const data = await response.json();
+          tripData.longitude = data.geonames[0].lng;
+          tripData.latitude = data.geonames[0].lat;
+          tripData.country = data.geonames[0].countryName;        
+      } catch (error) {
+        console.log("error", error);
+        // appropriately handle the error
+      }
+    };
+  getData(entireUrl);
+}
+//console.log(geonames('London'));
 
