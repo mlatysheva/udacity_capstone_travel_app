@@ -1,23 +1,29 @@
 function handleSubmit(event) {
     event.preventDefault()
 
-    // Save the input text into a variable
-    let formText = document.getElementById('name').value
+    // Save the input city into a variable
+    let city = document.getElementById('city').value
+    console.log(`The city is ${city}`);
+    let dep_date = document.getElementById('date').value
+    console.log(`The departure date is ${dep_date}.`);
+    let today = new Date().toLocaleDateString();
+    console.log(`Today's date is ${today}`);
+    
     
     // Check if the input text is not an empty string
-    Client.checkInput(formText);
+    Client.checkInput(city);
 
-    console.log("::: Form Submitted :::");  
+    console.log("Form Submitted");  
 
     // Post the input text to the server API and receive the sentiment 
     // analysed through the external API configured on the server side
 
-    postText('http://localhost:8081/text', { "text": formText})
-    .then(getSentiment('http://localhost:8081/sentiment'))
+    postTrip('http://localhost:8081/trip', { "city": city, "date": dep_date})
+    .then(getWeather('http://localhost:8081/weather'))
 }
 
 // Implement the POST method to send data to the server endpoint
-const postText = async (url = '', data = {}) => {
+const postTrip = async (url = '', data = {}) => {
     const response = await fetch(url, {
       method: 'POST',
       credentials: 'same-origin',
@@ -37,7 +43,7 @@ const postText = async (url = '', data = {}) => {
 }
 
 // Implement the GET method to receive information from the server endpoint
-const getSentiment = async (url = '') => {
+const getWeather = async (url = '') => {
     const response = await fetch(url, {
         method: 'GET',
         credentials: 'same-origin',
@@ -47,11 +53,11 @@ const getSentiment = async (url = '') => {
     });
     try {
         const userData = await response.json();
-        //console.log(userData.sentiment);
-        document.getElementById('polarity').innerHTML = `The sentiment of this text is: ${userData.polarity}`;
-        document.getElementById('polarity_confidence').innerHTML = `Polarity confidence is: ${userData.polarity_confidence}`;
-        document.getElementById('subjectivity').innerHTML = `Subjectivity is: ${userData.subjectivity}`;
-        document.getElementById('subjectivity_confidence').innerHTML = `Subjectivity confidence is: ${userData.subjectivity_confidence}`;
+        console.log(userData);
+        document.getElementById('city-country').innerHTML = `${userData.city}, ${userData.country} is`;
+        document.getElementById('duration').innerHTML = `${userData.duration} days away.`;
+        document.getElementById('temperature').innerHTML = `High is: ${userData.temperature_high}, Low is: ${userData.temperature_low}`;
+        document.getElementById('weather').innerHTML = `${userData.weather_desc}`;
   
     } catch (error) {
       console.log('error', error);

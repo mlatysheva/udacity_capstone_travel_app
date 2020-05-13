@@ -1,4 +1,7 @@
-### API to evaluate a text for its sentiment
+### Plan Your Trip application
+
+Geonames:
+
 
 This API is a simple form that takes a string input by the user, sends it to 
 our server endpoint, which in turn requests an external NLP analysing tool - Aylien API.
