@@ -56,8 +56,8 @@ const getWeather = async (url = '') => {
         console.log(userData);
         document.getElementById('city-country').innerHTML = `${userData.city}, ${userData.country} is`;
         document.getElementById('duration').innerHTML = `${userData.duration} days away.`;
-        document.getElementById('temperature').innerHTML = `High is: ${userData.temperature_high}, Low is: ${userData.temperature_low}`;
-        document.getElementById('weather').innerHTML = `${userData.weather_desc}`;
+        document.getElementById('temperature').innerHTML = `High is: ${userData.max_temp}, Low is: ${userData.min_temp}`;
+        document.getElementById('weather').innerHTML = `The precipitation index is ${userData.weather_desc}.`;
   
     } catch (error) {
       console.log('error', error);
