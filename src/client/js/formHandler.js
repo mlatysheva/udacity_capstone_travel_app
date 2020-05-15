@@ -53,14 +53,15 @@ const getWeather = async (url = '') => {
     });
     try {
         const userData = await response.json();
-        console.log(userData);
+        console.log(userData)
         document.getElementById('city-country').innerHTML = `${userData.city}, ${userData.country} is`;
         document.getElementById('duration').innerHTML = `${userData.duration} days away.`;
         document.getElementById('temperature').innerHTML = `High is: ${userData.max_temp}, Low is: ${userData.min_temp}`;
         document.getElementById('weather').innerHTML = `The precipitation index is ${userData.weather_desc}.`;
-  
+        document.getElementById('city-image').src = userData.imageUrl;
     } catch (error) {
       console.log('error', error);
     }
-}    
+  }
+  
 export { handleSubmit }

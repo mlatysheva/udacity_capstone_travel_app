@@ -23,7 +23,8 @@ let tripData = {
   'latitude': 0,
   'max_temp': 0,
   'min_temp': 0,
-  'weather_desc': ''
+  'weather_desc': '',
+  'imageUrl':''
 } 
 // Initialise the variable that will store the input data received from the user
 let inputTrip = '';
@@ -76,10 +77,12 @@ function sendTripInfo(req, res) {
   // for the given coordinates
   weatherbit(tripData.longitude,tripData.latitude,tripData.duration);
   console.log(tripData);
+  pixabay(tripData.city, tripData.country);
   res.send(tripData)
   //res.send(tripData)
 
 }
+
 
 // Calculate the number of days your trip apart.
 
@@ -151,5 +154,34 @@ function weatherbit(lng,lat,duration) {
         }
     }
   getWeather(entireUrl);
+}
+
+// Take the name of the city and country, find a photo of the city and display it in the user travel app via the url
+
+function pixabay (city, country) {
+  const key = process.env.KEYPIX;
+  //const key = '16563560-96393db758b1386eb9e57f9fa'
+
+  //'https://pixabay.com/api/?key=16563560-96393db758b1386eb9e57f9fa&q=yellow+flowers&image_type=photo'
+
+  const baseURL = 'https://pixabay.com/api/?key=';
+  const parametersURL = '&q='+ city + '+' + country +'&image_type=photo&orientation=horizontal&category=places&per_page=3';
+  const entireUrl = baseURL + key + parametersURL;
+
+  const getPhoto = async ( url = '')=>{
+    // console.log(data)
+      const response = await fetch(url);
+
+      try {
+        const body = await response.json();
+        //console.log(body);
+        tripData.imageUrl = body.hits[0].webformatURL;
+        console.log(tripData.imageUrl);
+      }catch(error) {
+      console.log("error", error);
+      // appropriately handle the error
+      }
+  }
+getPhoto(entireUrl);
 }
 

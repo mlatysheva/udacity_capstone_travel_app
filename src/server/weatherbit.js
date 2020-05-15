@@ -1,7 +1,7 @@
-const request = require("request");
+
 const fetch = require("node-fetch");
 
-function weatherbit(lng,lat,duration) {
+function weatherbit(lng,lat,duration,tripData) {
     //const Key = process.env.KEY;
     const Key = '90151fcc483c4a0e8d89cec631ff5381';
     const baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
@@ -19,34 +19,28 @@ function weatherbit(lng,lat,duration) {
     
           try {
             const body = await response.json();
-            console.log(body);
-            details.max_temp = body.data[duration-1].max_temp;
-            details.min_temp = body.data[duration-1].min_temp; 
-            console.log(details);
-            return details;
+            //console.log(body);
+            tripData.max_temp = body.data[duration-1].max_temp;
+            tripData.min_temp = body.data[duration-1].min_temp; 
+            //console.log(details);
           }catch(error) {
           console.log("error", error);
           // appropriately handle the error
           }
       }
-    getWeather(entireUrl);
+    return getWeather(entireUrl);
+
 }
 
-    
 
-//     request(entireUrl, { json: true }, (err, res, body) => {
-//         if (err) { return console.log(err); }
-//         // console.log(body.data);
-//         // console.log(body.data.length);
-//         //return body.data;
-//         let details = {"max_temp": 0, "min_temp": 0};
-//         let temp = body.data[duration-1];
-//         details.max_temp = temp.max_temp;
-//         details.min_temp = temp.min_temp; 
-//         console.log(body);
-//         console.log(details);
-//         return details;  
-//         });
-//     return details;
-//   }
-console.log(weatherbit(2.3488,48.85341,3));
+console.log(weatherbit(2.3488,48.85341,3, {
+    city: 'Moscow',
+    country: 'Russia',
+    duration: 6,
+    longitude: '37.61556',
+    latitude: '55.75222',
+    max_temp: 27.6,
+    min_temp: 27.1,
+    weather_desc: 0.375,
+    date: '2020-05-21'
+  }));
