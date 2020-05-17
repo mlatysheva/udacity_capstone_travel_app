@@ -1,4 +1,4 @@
-function handleSubmit(event) {
+async function handleSubmit(event) {
     event.preventDefault()
 
     // Save the input city into a variable
@@ -14,12 +14,20 @@ function handleSubmit(event) {
     Client.checkInput(city);
 
     console.log("Form Submitted");  
+    let userData = await Client.travelApp(city, dep_date);
+    console.log(userData);  
+    document.getElementById('city-country').innerHTML = `${userData.city}, ${userData.country} is`;
+    document.getElementById('duration').innerHTML = `${userData.duration} days away.`;
+    document.getElementById('temperature').innerHTML = `High is: ${userData.max_temp}, Low is: ${userData.min_temp}`;
+    document.getElementById('weather').innerHTML = `The precipitation index is ${userData.weather_desc}.`;
+    document.getElementById('city-image').src = userData.imageUrl;
 
     // Post the input text to the server API and receive the sentiment 
     // analysed through the external API configured on the server side
 
-    postTrip('http://localhost:8081/trip', { "city": city, "date": dep_date})
-    .then(getWeather('http://localhost:8081/weather'))
+    // postTrip('http://localhost:8081/trip', { "city": city, "date": dep_date})
+    await postTrip('http://localhost:8081/trip', { userData})
+    // .then(getWeather('http://localhost:8081/weather'))
 }
 
 // Implement the POST method to send data to the server endpoint
@@ -63,5 +71,5 @@ const getWeather = async (url = '') => {
       console.log('error', error);
     }
   }
-  
+
 export { handleSubmit }

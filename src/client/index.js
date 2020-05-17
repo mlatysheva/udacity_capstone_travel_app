@@ -1,6 +1,10 @@
+import { travelApp } from './js/app'
 import { checkInput } from './js/inputChecker'
 import { handleSubmit } from './js/formHandler'
 import { duration } from './js/duration'
+import { geonames } from './js/geonames'
+import { weatherbit } from './js/weatherbit'
+import { pixabay } from './js/pixabay'
 
 import './styles/resets.scss'
 import './styles/base.scss'
@@ -8,11 +12,17 @@ import './styles/form.scss'
 import './styles/responsive.scss'
 
 alert("I EXIST");
-//const buttonClick = document.getElementById("submit-button");
-//buttonClick.addEventListener("click", handleSubmit)
+const buttonClick = document.getElementById("submit-button");
+buttonClick.addEventListener('click', handleSubmit);
+buttonClick.addEventListener('click', checkInput)
 
 export {
+    travelApp,
     checkInput,
     handleSubmit,
-    duration
+    duration,
+    geonames,
+    weatherbit,
+    pixabay,
+
 }

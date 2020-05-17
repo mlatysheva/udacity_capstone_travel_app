@@ -55,7 +55,8 @@ app.listen(port, function () {
 app.post('/trip', saveTrip);
  
  function saveTrip (req, res) { 	
-  inputTrip = req.body;
+  inputTrip = req.body.userData;
+  console.log(inputTrip);
   dep_date = inputTrip.date;
   tripData.duration = duration(dep_date);
   tripData.city = inputTrip.city;
