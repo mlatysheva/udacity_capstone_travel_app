@@ -10,8 +10,11 @@ async function handleSubmit(event) {
     console.log(`Today's date is ${today}`);
     
     
-    // Check if the input text is not an empty string
+    // Check if the input city is not an empty string
     Client.checkInput(city);
+    
+    // Check if the departure date is more than 16 days away
+    Client.checkDate(dep_date);
 
     console.log("Form Submitted");  
     let userData = await Client.travelApp(city, dep_date);
@@ -26,7 +29,7 @@ async function handleSubmit(event) {
     // analysed through the external API configured on the server side
 
     // postTrip('http://localhost:8081/trip', { "city": city, "date": dep_date})
-    await postTrip('http://localhost:8081/trip', { userData})
+    await postTrip('http://localhost:8081/trip', { userData })
     // .then(getWeather('http://localhost:8081/weather'))
 }
 

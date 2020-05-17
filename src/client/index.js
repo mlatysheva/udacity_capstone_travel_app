@@ -1,9 +1,11 @@
 import { travelApp } from './js/app'
 import { checkInput } from './js/inputChecker'
+import { checkDate } from './js/inputChecker'
 import { handleSubmit } from './js/formHandler'
 import { duration } from './js/duration'
 import { geonames } from './js/geonames'
 import { weatherbit } from './js/weatherbit'
+import { weatherbitHistory } from './js/weatherbit'
 import { pixabay } from './js/pixabay'
 
 import './styles/resets.scss'
@@ -19,10 +21,12 @@ buttonClick.addEventListener('click', checkInput)
 export {
     travelApp,
     checkInput,
+    checkDate,
     handleSubmit,
     duration,
     geonames,
     weatherbit,
+    weatherbitHistory,
     pixabay,
 
 }

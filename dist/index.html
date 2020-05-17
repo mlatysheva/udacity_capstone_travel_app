@@ -18,16 +18,16 @@
         </header>
 
         <main class = container>
-            <section class = "img" id = "image">
-                <img class = "city_image" src = "../src/client/media/red-square.jpg">
-            </section>
+            <figure class = "img" id = "image">
+                <img id = "city-image" src = "../src/client/media/red-square.jpg">
+            </figure>
             <section class = "form">
                 <form class="form-inline" action="">
                     <label for="city">My trip to:</label>
                     <input type="city" id="city" placeholder="Enter city" name="city">
                     <label for="date">Departing on:</label>
                     <input type="date" id="date" placeholder="Enter the departure date" name="date">
-                    <button type="submit" id = "submit-button" onclick="return Client.handleSubmit(event)">Get info</button>            
+                    <button type="submit" id = "submit-button">Get info</button>            
                   </form>
             </section>
             <section class = "save-remove">
@@ -37,7 +37,7 @@
             <section class = "results">
                 <div id = "city-country"></div>    
                 <div id = "duration"></div>            
-                <div>Typical weather for then:</div>
+                <div>The weather forecast for then is:</div>
                 <div id = "temperature"></div>
                 <div id = "weather"></div>
             </section>
