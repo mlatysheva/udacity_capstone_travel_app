@@ -1,6 +1,6 @@
 // Take the longitude, latitude and the period until the trip get the maximum and minimum temperature and update
 // the tripData endpoint with this new information
-// const fetch = require("node-fetch");
+//const fetch = require("node-fetch");
 
 // Take the current forecast data
 
@@ -67,7 +67,7 @@ const weatherbitHistory = async (lng,lat,dep_date) => {
     console.log(error);
   }
 }
-// weatherbitHistory(2.3488,48.85341,'2020-06-11')
+//weatherbitHistory(2.3488,48.85341,'2020-06-11')
 
 
 export { temperature,
