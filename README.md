@@ -42,4 +42,4 @@ The production server runs on port 8081.
 
 ## Additional features
 
-The project uses SASS for styling, service workers to make content available offline and minifies js and styles for the production environment. Besides, the client API can show the content offline but cannot make calls to the external API offline.
+The project uses SASS for styling, service workers to make content available offline and minifies js and styles for the production environment. Besides, the client API can show the content offline but cannot make calls to the external API offline. There are three simple Jest tests added to check some js functionality on the client and server sides.
