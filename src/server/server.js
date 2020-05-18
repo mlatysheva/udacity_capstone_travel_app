@@ -55,12 +55,14 @@ app.listen(port, function () {
 app.post('/trip', saveTrip);
  
  function saveTrip (req, res) { 	
-  inputTrip = req.body.userData;
-  console.log(inputTrip);
-  dep_date = inputTrip.date;
-  tripData.duration = duration(dep_date);
-  tripData.city = inputTrip.city;
-  tripData.date = dep_date;
+  //inputTrip = req.body.userData;
+  tripData = req.body.userData
+  console.log(tripData);
+  // dep_date = inputTrip.date;
+  // tripData.duration = duration(dep_date);
+  // tripData.city = inputTrip.city;
+  // tripData.date = dep_date;
+
   
   res.send('{\"Status\":\"OK\"}');
 }
@@ -70,15 +72,15 @@ app.post('/trip', saveTrip);
 app.get('/weather', sendTripInfo);
 
 function sendTripInfo(req, res) {
-  console.log('Sending the weather forecast');
-  // Call the geonames function to receive the longitude, latitude and country for the given city
-  geonames(tripData.city);
-  console.log(`After running geonames the tripData is: ${tripData}`);
-  // Call the weatherbit function to receive the maximum and minimum temperature and the precipitation index
-  // for the given coordinates
-  weatherbit(tripData.longitude,tripData.latitude,tripData.duration);
-  console.log(tripData);
-  pixabay(tripData.city, tripData.country);
+  // console.log('Sending the weather forecast');
+  // // Call the geonames function to receive the longitude, latitude and country for the given city
+  // geonames(tripData.city);
+  // console.log(`After running geonames the tripData is: ${tripData}`);
+  // // Call the weatherbit function to receive the maximum and minimum temperature and the precipitation index
+  // // for the given coordinates
+  // weatherbit(tripData.longitude,tripData.latitude,tripData.duration);
+  // console.log(tripData);
+  // pixabay(tripData.city, tripData.country);
   res.send(tripData)
   //res.send(tripData)
 

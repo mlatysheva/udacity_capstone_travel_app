@@ -4,6 +4,7 @@ import { checkDate } from './js/inputChecker'
 import { handleSubmit } from './js/formHandler'
 import { duration } from './js/duration'
 import { geonames } from './js/geonames'
+import { temperature } from './js/weatherbit'
 import { weatherbit } from './js/weatherbit'
 import { weatherbitHistory } from './js/weatherbit'
 import { pixabay } from './js/pixabay'
@@ -25,6 +26,7 @@ export {
     handleSubmit,
     duration,
     geonames,
+    temperature,
     weatherbit,
     weatherbitHistory,
     pixabay,

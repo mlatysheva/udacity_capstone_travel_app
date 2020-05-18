@@ -3,6 +3,17 @@
 // const fetch = require("node-fetch");
 
 // Take the current forecast data
+
+const temperature = async(lng,lat, duration, dep_date) => {
+  let weather = (0,0);
+  if (duration < 17 && duration > 0) {    
+      weather = await Client.weatherbit(lng, lat, duration)
+  } else {
+      weather = await Client.weatherbitHistory(lng, lat, dep_date)
+  };
+  return weather;
+}
+//temperature(duration);
 const weatherbit = async (lng,lat,duration) => {
   //const Key = process.env.KEY;
   const Key = '90151fcc483c4a0e8d89cec631ff5381';
@@ -10,6 +21,7 @@ const weatherbit = async (lng,lat,duration) => {
   const lonlatURL = '&lat=' + lat + '&lon=' + lng + '&days=' + duration + '&key=';
   const entireUrl = baseURL + lonlatURL + Key;
   try {
+    console.log(`The coordinates are: ${lng}, ${lat}`)
     const response =  await fetch(entireUrl);
     const body = await response.json();
     const data = await body.data[duration-1];
@@ -33,11 +45,12 @@ const weatherbitHistory = async (lng,lat,dep_date) => {
 
   const newDate = new Date(dep_date);
   let historicDate1 = new Date(new Date(newDate).setFullYear(new Date(newDate).getFullYear(newDate) - 1)).toISOString().slice(0,10);
+  //let historicDate1 = new Date(newDate).setFullYear(new Date(newDate).getFullYear(newDate) - 1).toISOString().slice(0,10);
   let historicDate2 = new Date(historicDate1)
   historicDate2.setDate(historicDate2.getDate() + 1);
   historicDate2 = historicDate2.toISOString().slice(0,10);
   console.log(`historicdate2 is ${historicDate2}`);
-  console.log(` historicDate1 is ${historicDate1}`);
+  console.log(`historicDate1 is ${historicDate1}`);
 
   const Key = '90151fcc483c4a0e8d89cec631ff5381';
   const baseURL = 'https://api.weatherbit.io/v2.0/history/daily?';
@@ -57,5 +70,6 @@ const weatherbitHistory = async (lng,lat,dep_date) => {
 // weatherbitHistory(2.3488,48.85341,'2020-06-11')
 
 
-export { weatherbit,
+export { temperature,
+        weatherbit,
         weatherbitHistory }

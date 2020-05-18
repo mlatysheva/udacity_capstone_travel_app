@@ -18,19 +18,22 @@ async function handleSubmit(event) {
 
     console.log("Form Submitted");  
     let userData = await Client.travelApp(city, dep_date);
-    console.log(userData);  
-    document.getElementById('city-country').innerHTML = `${userData.city}, ${userData.country} is`;
-    document.getElementById('duration').innerHTML = `${userData.duration} days away.`;
-    document.getElementById('temperature').innerHTML = `High is: ${userData.max_temp}, Low is: ${userData.min_temp}`;
-    document.getElementById('weather').innerHTML = `The precipitation index is ${userData.weather_desc}.`;
-    document.getElementById('city-image').src = userData.imageUrl;
+    console.log(userData); 
 
     // Post the input text to the server API and receive the sentiment 
     // analysed through the external API configured on the server side
 
     // postTrip('http://localhost:8081/trip', { "city": city, "date": dep_date})
-    await postTrip('http://localhost:8081/trip', { userData })
+    // await postTrip('http://localhost:8081/trip', { userData })
     // .then(getWeather('http://localhost:8081/weather'))
+
+    // document.getElementById('city-country').innerHTML = `${userData.city}, ${userData.country} is`;
+    // document.getElementById('duration').innerHTML = `${userData.duration} days away.`;
+    // document.getElementById('temperature').innerHTML = `High is: ${userData.max_temp}, Low is: ${userData.min_temp}`;
+    // document.getElementById('weather').innerHTML = `The precipitation index is ${userData.weather_desc}.`;
+    // document.getElementById('city-image').src = userData.imageUrl;
+
+    
 }
 
 // Implement the POST method to send data to the server endpoint
