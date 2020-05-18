@@ -26,7 +26,7 @@ app.get('/', function (req, res) {
 })
 
 // Listen for requests on the given port
-port = 8081
+const port = 8081
 app.listen(port, function () {
     console.log(`Example app listening on port ${port}!`)
 })
@@ -65,3 +65,5 @@ app.get('/weather', sendTripInfo);
 function sendTripInfo(req, res) {
     res.send(tripData)
 }
+
+module.exports = app;

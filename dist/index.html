@@ -27,17 +27,20 @@
                     <input type="city" id="city" placeholder="Enter city" name="city">
                     <label for="date">Departing on:</label>
                     <input type="date" id="date" placeholder="Enter the departure date" name="date">
+                    <label for="date">Returning on:</label>
+                    <input type="date" id="return-date" placeholder="Enter the return date" name="return-date">
                     <button type="submit" id = "submit-button">Get info</button>            
                   </form>
             </section>
-            <section class = "save-remove">
+            <!-- <section class = "save-remove">
                 <button type="submit">Save trip</button>
                 <button type="submit">Remove trip</button>
-            </section>
+            </section> -->
             <section class = "results">
+                <div id = "trip-length"></div>
                 <div id = "city-country"></div>    
                 <div id = "duration"></div>            
-                <div>The weather forecast for then is:</div>
+                <div>The weather forecast for your departure date is:</div>
                 <div id = "temperature"></div>
                 <div id = "weather"></div>
             </section>

@@ -9,6 +9,10 @@ import { temperature } from './js/weatherbit'
 import { weatherbit } from './js/weatherbit'
 import { weatherbitHistory } from './js/weatherbit'
 import { pixabay } from './js/pixabay'
+import imageMoscow from './media/red-square.jpg';
+
+var moscowjpg = document.getElementById('city-image');
+moscowjpg.src = imageMoscow;
 
 import './styles/resets.scss'
 import './styles/base.scss'
