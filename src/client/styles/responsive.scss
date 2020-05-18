@@ -1,4 +1,4 @@
-/* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
+// Add responsive design - display the form controls vertically instead of horizontally on screens that are less than 600px wide
 
 @media (max-width: 600px) {
     .form-inline input {
@@ -10,10 +10,6 @@
       align-items: stretch;
     }
 
-    .save-remove {
-        flex-direction: column;
-        align-items: stretch;
-    }
 }
 
 /* Layout for average screens */
@@ -38,10 +34,6 @@
     }
 
     .form {
-        grid-area: "left";
-    }
-    
-    .save-remove {
         grid-area: "left";
     }
     
