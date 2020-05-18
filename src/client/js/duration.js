@@ -1,3 +1,5 @@
+// Calculate the number of days between two dates
+
 function duration(date1, date2) {
 
     // Calculate the number of milliseconds per day

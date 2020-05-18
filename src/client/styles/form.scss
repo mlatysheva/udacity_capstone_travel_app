@@ -6,12 +6,10 @@
     padding: 0px;
 }
   
-/* Add some margins for each label */
 .form-inline label {
     margin: 0px;
 }
   
-  /* Style the input fields */
 .form-inline input {
     vertical-align: middle;
     margin: 10px;
@@ -19,13 +17,6 @@
     background-color: #fff;
     border: 2px solid #ddd;
     border-radius: 5px;
-  }
- 
-.save-remove {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: stretch;
-    padding: 0px;
   }
 
 button {
@@ -37,7 +28,7 @@ button {
 	color: white;
   }
   
-  button:hover {
+button:hover {
     background-color: rgb(148, 107, 129);
     cursor: pointer;
   }

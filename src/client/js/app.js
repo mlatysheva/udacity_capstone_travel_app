@@ -1,42 +1,42 @@
-// Receive the city and date input by the user and run check functions to see if the data is valid
-// Invoke the main app function that will collect all data from APIs and send the data to the server
+// Receive the city, departure date and return date from the user and run check functions to see if the data is valid
+// Invoke the main app function that will collect all data from APIs, send the data to the server and update the user interface
+
 async function handleSubmit(event) {
     event.preventDefault()
 
     // Save the input city into a variable
     let city = document.getElementById('city').value
-    console.log(`The city is ${city}`);
     let dep_date = document.getElementById('date').value;
-    console.log(`The departure date is ${dep_date}.`);
     let return_date = document.getElementById('return-date').value;
-    //let today = new Date().toLocaleDateString();
     let today = new Date();
-    console.log(`Today's date is ${today}`);
     
-    // Check if the input city is not an empty string
+    // Check that the input city is not an empty string
     Client.checkInput(city);
     
-    // Check if the departure date is more than 16 days away
+    // Check that the departure date is not more than 16 days away
     Client.checkDate(today, dep_date);
 
-    // Check if the return date is more than the departure date - valid
+    // Check that the return date is more than the departure date to be valid
     Client.checkTripLength(dep_date, return_date);
 
-    console.log("Form Submitted");  
+    console.log("Trip data submitted");  
+
+    // Invoke the main function that will call all external APIs, post data to the server and update the user interface
     let userData = await Client.travelApp(city, dep_date, return_date);
-    console.log(userData);     
+    console.log(`The userData is ${userData}`);     
 }
 
-// Run main function that will collect data from external APIs, store the data in the app endpoint tripData
-// and send the tripData to the server and
-// update the user interface with the data received from the APIs
+// The main function that will: 
+// 1) collect data from external APIs, 
+// 2) store the data in the app endpoint tripData
+// 3) send the tripData to the server and
+// 4) update the user interface with the data received from the APIs
 
 const travelApp = async (city, dep_date, return_date) => {
-    // Invoke the function to calculate how many days before the trip
-    //let today = new Date().toLocaleDateString();
+    
+    // Invoke the function to calculate how many days are left before the trip
     let today = new Date();
-    console.log(`Today is ${today} and dep_date is ${dep_date}`);
-
+   
     // Calculate how many days the departure date is apart from today
     let duration = await Client.duration(today, dep_date);
 
@@ -44,8 +44,7 @@ const travelApp = async (city, dep_date, return_date) => {
     let length = await Client.duration(dep_date, return_date);
     
     console.log(`Days before the trip: ${duration}.`);
-    console.log(`The length of the trip is ${length} days.`)
-    //Client.checkDate(date)
+    console.log(`The length of the trip is ${length} days.`);
 
     // Invoke the function to get the coordinates and country for the given city
     let location = await Client.geonames(city);
@@ -79,7 +78,7 @@ const travelApp = async (city, dep_date, return_date) => {
     await postTrip('http://localhost:8081/trip', { tripData })
     // .then(getWeather('http://localhost:8081/weather'))
 
-    // Update the user interface dynamically with the data collected from external APIs
+    // Update the user interface dynamically with the tripData endpoint collected from the external APIs
 
     document.getElementById('city-country').innerHTML = `${tripData.city}, ${tripData.country} is`;
     document.getElementById('duration').innerHTML = `${tripData.duration} days away.`;
@@ -110,7 +109,7 @@ const postTrip = async (url = '', data = {}) => {
     }
 }
 
-// Define the GET method to receive information from the server endpoint
+// Define the GET method in case we need to receive information from the server endpoint
 
 const getWeather = async (url = '') => {
     const response = await fetch(url, {

@@ -1,13 +1,16 @@
 ### Plan Your Trip API
 
-This is a one-page application that receives the city and the date to which and when the user is planning to travel and 
-returns the weather forecast for the destination date and updates the picture with the photo of the destination city.
-
-This API uses the following external APIs to get information:
-
-Geonames: to receive the longitude and latitude based on the destination city;
-Weatherbit: to receive the forecast based on the longitude and latitude;
-Pixabay: to receive the photo url based on the city and country.
+This is a one-page form application that: 
+- receives from the user the city, the departure date and the return date, 
+- makes API calls to three external APIs and receives weather and location data, 
+- calculates how many days the trip is away,
+- calculates the length of the trip,
+- posts the collected trip data to the server and 
+- updates the user interface with the data it returns:
+1) from Weatherbit API: the weather forecast (max and min temperature and precipitation index) for the departure date if the trip is no more than 16 days away or
+2) from Weatherbit API: the historic weather data (max and min temperature and precipitation index) for the departure date if the trip is more than 16 days way 
+3) from Geonames API: the longitude, latitude and the country
+4) from Pixabay API: the url of an image for the given city and country
 
 ## Configuration
 
@@ -17,15 +20,18 @@ The development server is running on port 8080 and the production server is runn
 
 ## Functionality
 
-The project is a two-line form for user to put the city and departure date.
-Once the user has inputed the data into the form and clicked "Get info" button, the API sends the data via the POST method to the local server operating on port 8081. The local server stores all the information for the trip in the global variable tripData, which is the app endpoint.
-Having received the user input, the local server makes the following requests to the external API:
-1) Geonames: taking the city as the basis, the server requests Geonames for the country, longitude and latitude of the distination city;
-2) Weatherbit: taking the longitude and latitude, the server requests Weatherbit for the weather forecast for the destination city for the departure date.
-3) Pixabay: taking the city and the country, the server requests Pixabay for an url of an image for the destination city.
-4) Period before the trip: taking the departure date, the server calculates the period left before the trip.
+The project is a three-line form for user to input the city, the departure date and the return date for his/her upcoming trip.
+Once the user has inputed the data into the form and clicked "Get info" button, the Travel App makes external API calls to Geonames, Weatherbit and Pixabay APIs by invoking dedicated functions:
+1) Geonames: taking the city as the basis, the Travel App calls Geonames API to get the country, longitude and latitude of the distination city;
+2) Weatherbit: taking the longitude, latitude, and the departure date, Travel App requests Weatherbit for the weather forecast for the destination city for the departure date.
+If the departure date is more than 16 days away, Travel App makes a different call to get historic data instead.
+3) Pixabay: taking the city and the country, Travel App requests Pixabay for an url of an image for the destination city.
+4) Period before the trip and duration of the trip: taking the departure date, Travel App calculates the period left before the trip.
+Taking the departure and return dates, Travel App calculates the duration of the trip.
 
-Once all the trip information has been gathered in the API endpoint tripData, the server sends it back, via the GET request, to the client function, formHandler, which dynamically updates the user interface by making changes to the properties of relevant DOM elements.
+Travel App collects all the data into the tripData endpoint variable that it sends via the POST method to the local server operating on port 8081. The local server stores all the information about the trip.
+
+Once all the trip information has been gathered in the API endpoint tripData, Travel App dynamically updates the user interface by making changes to the properties of relevant DOM elements.
 
 ## Development server and production server
 
@@ -36,5 +42,4 @@ The production server runs on port 8081.
 
 ## Additional features
 
-The project uses SASS for styling and minifies js and styles for the production environment.
-Besides, the client API can show the content offline but cannot make calls to the external API offline.
+The project uses SASS for styling, service workers to make content available offline and minifies js and styles for the production environment. Besides, the client API can show the content offline but cannot make calls to the external API offline.

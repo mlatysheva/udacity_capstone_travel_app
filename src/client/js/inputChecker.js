@@ -1,4 +1,4 @@
-// Check whether the city field is not empty
+// Check that the city field is not empty
 function checkInput(inputCity) {
     console.log(": Running checkInput :", inputCity);
     if(inputCity === '') {
@@ -6,7 +6,8 @@ function checkInput(inputCity) {
         return false;
     }
 }
-// Check whether the departure date is within 16 days.
+// Check that the departure date is within 16 days. Otherwise alert the user that
+// historic data will be provided rather than forecast
 function checkDate(today, inputDate) {
     const duration = Client.duration(today, inputDate);
     if (duration > 16 || duration < 0) {

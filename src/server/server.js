@@ -1,11 +1,9 @@
 const fetch = require('node-fetch');
-// const dotenv = require('dotenv');
-// dotenv.config();
 
 const path = require('path')
+
 const express = require('express')
 
-//const mockAPIResponse = require('./mockAPI.js')
 const bodyParser = require('body-parser')
 
 const cors = require('cors')
@@ -18,8 +16,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static('dist'))
 
-console.log(__dirname)
-
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
     res.sendFile(path.resolve('src/client/views/index.html'))
@@ -28,7 +24,7 @@ app.get('/', function (req, res) {
 // Listen for requests on the given port
 const port = 8081
 app.listen(port, function () {
-    console.log(`Example app listening on port ${port}!`)
+    console.log(`Travel app listening on port ${port}!`)
 })
 
 // Initialise the global server endpoint that will store all the data sent from the client app

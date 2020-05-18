@@ -1,8 +1,7 @@
+// Get the country, longitude and latitude from Geonames API by entering the city and 
+// return these parameters
 const geonames = async (city) => {
-  // Get the country, longitude and latitude from Geonames API by entering the city and record these parameters into
-  // the tripData endpoint
   
-  //const user = process.env.USERNAME;
   const user = 'mlatysheva';
   const baseUrl = 'http://api.geonames.org/searchJSON?q=';
   const addParameters = '&maxRows=1&username=';

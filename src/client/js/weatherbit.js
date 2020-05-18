@@ -1,9 +1,8 @@
-// Take the longitude, latitude and the period until the trip get the maximum and minimum temperature and update
-// the tripData endpoint with this new information
-//const fetch = require("node-fetch");
+// Take the longitude, latitude and the period until the trip and
+// return the maximum and minimum temperatures and the precipitation index for the given location.
+// If the departure date is more than 16 days away, historic data is taken rather than the forecast
 
-// Take the current forecast data
-
+// Main function invoking either forecast or historic data API call
 const temperature = async(lng,lat, duration, dep_date) => {
   let weather = (0,0);
   if (duration < 17 && duration > 0) {    
@@ -13,9 +12,9 @@ const temperature = async(lng,lat, duration, dep_date) => {
   };
   return weather;
 }
-//temperature(duration);
+
+// Get weather forecast data for the departure date that is less than 17 days away.
 const weatherbit = async (lng,lat,duration) => {
-  //const Key = process.env.KEY;
   const Key = '90151fcc483c4a0e8d89cec631ff5381';
   const baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
   const lonlatURL = '&lat=' + lat + '&lon=' + lng + '&days=' + duration + '&key=';
@@ -34,23 +33,16 @@ const weatherbit = async (lng,lat,duration) => {
   }
 }
 
-// Take the one year historic data for a departure date that is more than 16 days apart
+// Take the one year historic data for a departure date that is more than 16 days away.
 
 const weatherbitHistory = async (lng,lat,dep_date) => {
-  // const Key = process.env.KEY;
-
-  // The format of the API request to get historic data is: &lat=38.123&lon=-78.543&start_date=2020-05-13&end_date=2020-05-14
-  // Transform the departure date into a date one year ago and calculate the following date
-  // to get the start and end dates for the API request
-
+  
+  // Identify the historic date one year before the departure date
   const newDate = new Date(dep_date);
   let historicDate1 = new Date(new Date(newDate).setFullYear(new Date(newDate).getFullYear(newDate) - 1)).toISOString().slice(0,10);
-  //let historicDate1 = new Date(newDate).setFullYear(new Date(newDate).getFullYear(newDate) - 1).toISOString().slice(0,10);
   let historicDate2 = new Date(historicDate1)
   historicDate2.setDate(historicDate2.getDate() + 1);
   historicDate2 = historicDate2.toISOString().slice(0,10);
-  console.log(`historicdate2 is ${historicDate2}`);
-  console.log(`historicDate1 is ${historicDate1}`);
 
   const Key = '90151fcc483c4a0e8d89cec631ff5381';
   const baseURL = 'https://api.weatherbit.io/v2.0/history/daily?';
@@ -67,8 +59,6 @@ const weatherbitHistory = async (lng,lat,dep_date) => {
     console.log(error);
   }
 }
-//weatherbitHistory(2.3488,48.85341,'2020-06-11')
-
 
 export { temperature,
         weatherbit,

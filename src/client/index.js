@@ -11,7 +11,7 @@ import { weatherbitHistory } from './js/weatherbit'
 import { pixabay } from './js/pixabay'
 import imageMoscow from './media/red-square.jpg';
 
-var moscowjpg = document.getElementById('city-image');
+let moscowjpg = document.getElementById('city-image');
 moscowjpg.src = imageMoscow;
 
 import './styles/resets.scss'
@@ -19,7 +19,6 @@ import './styles/base.scss'
 import './styles/form.scss'
 import './styles/responsive.scss'
 
-alert("I EXIST");
 const buttonClick = document.getElementById("submit-button");
 buttonClick.addEventListener('click', handleSubmit);
 buttonClick.addEventListener('click', checkInput)
