@@ -1,6 +1,7 @@
 import { travelApp } from './js/app'
 import { checkInput } from './js/inputChecker'
 import { checkDate } from './js/inputChecker'
+import { checkTripLength } from './js/inputChecker'
 import { handleSubmit } from './js/app'
 import { duration } from './js/duration'
 import { geonames } from './js/geonames'
@@ -23,6 +24,7 @@ export {
     travelApp,
     checkInput,
     checkDate,
+    checkTripLength,
     handleSubmit,
     duration,
     geonames,

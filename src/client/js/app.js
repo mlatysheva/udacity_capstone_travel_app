@@ -9,14 +9,18 @@ async function handleSubmit(event) {
     let dep_date = document.getElementById('date').value;
     console.log(`The departure date is ${dep_date}.`);
     let return_date = document.getElementById('return-date').value;
-    let today = new Date().toLocaleDateString();
+    //let today = new Date().toLocaleDateString();
+    let today = new Date();
     console.log(`Today's date is ${today}`);
     
     // Check if the input city is not an empty string
     Client.checkInput(city);
     
     // Check if the departure date is more than 16 days away
-    Client.checkDate(dep_date);
+    Client.checkDate(today, dep_date);
+
+    // Check if the return date is more than the departure date - valid
+    Client.checkTripLength(dep_date, return_date);
 
     console.log("Form Submitted");  
     let userData = await Client.travelApp(city, dep_date, return_date);
@@ -32,8 +36,13 @@ const travelApp = async (city, dep_date, return_date) => {
     //let today = new Date().toLocaleDateString();
     let today = new Date();
     console.log(`Today is ${today} and dep_date is ${dep_date}`);
+
+    // Calculate how many days the departure date is apart from today
     let duration = await Client.duration(today, dep_date);
+
+    // Calculate the duration of the trip and check if the return date is more than the departure date
     let length = await Client.duration(dep_date, return_date);
+    
     console.log(`Days before the trip: ${duration}.`);
     console.log(`The length of the trip is ${length} days.`)
     //Client.checkDate(date)
