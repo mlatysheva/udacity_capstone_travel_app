@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Plan Your Trip</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/dist/main.css" rel="stylesheet"></head>
+
+    <body>
+
+        <header>
+            <div>
+                Travel Planner                
+            </div>
+        </header>
+
+        <main class = container>
+            <figure class = "img" id = "image">
+                <img id = "city-image" src = "../src/client/media/red-square.jpg">
+            </figure>
+            <section class = "form">
+                <form class="form-inline" action="">
+                    <label for="city">My trip to:</label>
+                    <input type="city" id="city" placeholder="Enter city" name="city">
+                    <label for="date">Departing on:</label>
+                    <input type="date" id="date" placeholder="Enter the departure date" name="date">
+                    <label for="date">Returning on:</label>
+                    <input type="date" id="return-date" placeholder="Enter the return date" name="return-date">
+                    <button type="submit" id = "submit-button">Get info</button>            
+                  </form>
+            </section>
+            <section class = "results">
+                <div id = "trip-length"></div>
+                <div id = "city-country"></div>    
+                <div id = "duration"></div>            
+                <div>The weather forecast for your departure date is:</div>
+                <div id = "temperature"></div>
+                <div id = "weather"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div>This Travel Planner is brought to you by Maria Latysheva in cooperation with Geonames, Weatherbit and Pixabay.</div>
+        </footer>
+        <script>
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/dist/service-worker.js');
+                });
+            }
+        </script>
+
+    <script type="text/javascript" src="/dist/main.js"></script></body>
+</html>
